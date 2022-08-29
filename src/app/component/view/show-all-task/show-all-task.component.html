@@ -1,22 +1,59 @@
+<h2>All Tasks</h2>
 
- <h2>All Task</h2>
+<div class="input-group">
+  <input
+    type="search"
+    class="form-control rounded"
+    placeholder="Search"
+    aria-label="Search"
+    aria-describedby="search-addon"
+    name="username"
+    #username="ngModel"
+    ngModel
+  />
+  <button
+    type="button"
+    class="btn btn-outline-primary"
+    (click)="getAllTasks(username.value)"
+  >
+    search
+  </button>
+</div>
 
-    <input type="text" name="username" class="form-control" #username ="ngModel" ngModel/>
-    <button type="submit" (click)="getAllTasks(username.value)">Search</button>
-    <div class="row">
-        <div class="col-md-8 col-sm-12">
-            <div class="card " *ngFor="let task of tasks" (click)="getSingleTask(task.id)">
-                <img class="card-img-top" alt="Wild Landscape" 
-                src= "https://task.ecmpp.com/storage/{{task.image.replace('public/', '')}}" 
-                alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">{{task.title}}</h5>
-                  <p class="card-text">{{task.content}}</p>
-                  <span>{{task.username}}</span>
-                    <br/>
-                  <button class="btn btn-success" (click)="goUpdate($event, task.id, task.title, task.content)">Update</button>
-                  <button class="btn btn-danger" (click)="deleteTask($event, task.id)">Delete</button>
-                </div>
-              </div>
-        </div>
+<div class="row">
+  <div class="col-lg-4 col-md-6 col-sm-12 mb-5 mt-5" style="display: contents;">
+    <div
+      class="card"
+      *ngFor="let task of tasks"
+      (click)="getSingleTask(task.id)"
+    >
+      <img
+        class="card-img-top"
+        alt="Wild Landscape"
+        src="https://task.ecmpp.com/storage/{{
+          task.image.replace('public/', '')
+        }}"
+        alt="Card image cap"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ task.title }}</h5>
+        <p class="card-text">{{ task.content }}</p>
+        <span class="user"><i style="font-size:24px" class="fa">&#xf007;</i> {{ task.username }}</span>
+        <br />
+        <button
+          class="btn btn-success"
+          (click)="goUpdate($event, task.id, task.title, task.content)"
+        >
+          Update
+        </button>
+        <button class="btn btn-danger" (click)="deleteTask($event, task.id)">
+          Delete
+        </button>
+      </div>
     </div>
+  </div>
+</div>
+
+<div id="mybutton">
+  <a class="newTask" routerLink="/createTask">Create New Task</a>
+  </div>

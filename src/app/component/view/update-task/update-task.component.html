@@ -1,0 +1,74 @@
+<h2>Update Task</h2>
+<div class="container_form" *ngIf="!success">
+  <div class="row">
+    <div class="col-md-12">
+      <form #f="ngForm" (ngSubmit)="updateTask(title, content)">
+        <div class="form-group">
+          <div class="form-outline">
+            <label class="form-label">Title</label>
+            <input
+              class="form-control"
+              placeholder="title"
+              name="title"
+              type="text"
+              ngModel
+              #title="ngModel"
+              minlength="3"
+              maxlength="100"
+              required
+              [value]="title"
+            />
+
+            <div
+              *ngIf="title.touched && title.invalid"
+              class="alert alert-danger"
+            >
+              <div *ngIf="title.errors?.['minlength']">
+                Min length is {{title.errors?.['minlength'].requiredLength}} and
+                you enter {{title.errors?.['minlength'].actualLength}}
+              </div>
+              <div *ngIf="title.errors?.['maxlength']">
+                Max length is {{title.errors?.['maxlength'].requiredLength}} and
+                you enter {{title.errors?.['maxlength'].actualLength}}
+              </div>
+            </div>
+          </div>
+
+          <br />
+          <div class="form-outline">
+            <label class="form-label">Content</label>
+            <textarea
+              class="form-control"
+              placeholder="Content.."
+              name="content"
+              ngModel
+              #content="ngModel"
+              minlength="10"
+              maxlength="255"
+              required
+              rows="4"
+            >
+            {{content}}
+            </textarea>
+
+            <div
+              *ngIf="content.touched && content.invalid"
+              class="alert alert-danger"
+            >
+              <div *ngIf="content.errors?.['minlength']">Min length is 10</div>
+              <div *ngIf="content.errors?.['maxlength']">Min length is 255</div>
+            </div>
+          </div>
+          <br />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary" [disabled]="f.invalid">
+          Update Task
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<div *ngIf="success" class="alert alert-success" role="alert">
+  This is a success task!
+</div>

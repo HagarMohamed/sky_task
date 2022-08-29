@@ -1,0 +1,75 @@
+
+<h2>Create Task</h2>
+<div class="container_form" *ngIf="!success">
+    <div class="row">
+        <div class="col-md-12">
+
+<form #f="ngForm" (ngSubmit)="createTask(title, content, username)">
+    <div class="form-group">
+
+        <div class="form-outline">
+        <label class="form-label">Title</label>
+        <input class="form-control" placeholder="title" name="title" type="text" ngModel #title= "ngModel" 
+         minlength="3" maxlength="100" required/>
+
+         <div *ngIf="title.touched && title.invalid" class="alert alert-danger">
+            <div *ngIf="title.errors?.['minlength']">Min length is {{title.errors?.['minlength'].requiredLength}}
+                and you enter  {{title.errors?.['minlength'].actualLength}}
+            </div>
+            <div *ngIf="title.errors?.['maxlength']">Max length is {{title.errors?.['maxlength'].requiredLength}}
+                and you enter  {{title.errors?.['maxlength'].actualLength}}
+            </div> 
+            
+        </div>
+
+        </div>
+        <br>
+        <div class="form-outline">
+            <label class="form-label">Username</label>
+        <input class="form-control" name="username" placeholder="username" ngModel #username = "ngModel"
+        minlength="3" maxlength="100" required/>
+
+        <div *ngIf="username.touched && title.invalid" class="alert alert-danger">
+            <div *ngIf="username.errors?.['minlength']">Min length is {{username.errors?.['minlength'].requiredLength}}
+                and you enter  {{username.errors?.['minlength'].actualLength}}
+            </div>
+            <div *ngIf="username.errors?.['maxlength']">Max length is {{username.errors?.['maxlength'].requiredLength}}
+                and you enter  {{username.errors?.['maxlength'].actualLength}}
+            </div> 
+            
+        </div>
+
+        </div>
+
+        <br>
+        <div class="form-outline">
+        <label class="form-label">Content</label>
+        <textarea class="form-control" placeholder="Content.." name="content" ngModel #content = "ngModel"
+        minlength="10" maxlength="255" required rows="4">
+            </textarea>
+
+            <div *ngIf="content.touched && content.invalid" class="alert alert-danger">
+                <div *ngIf="content.errors?.['minlength']">Min length is 10</div>
+                <div *ngIf="content.errors?.['maxlength']"> Min length is 255</div>
+                
+            </div>
+
+        </div>
+        <br/>
+        <div class="form-outline">
+        <label for="exampleFormControlFile1">Example file input</label>
+        <input class="form-control-file" required name="image" type="file" (change)="onChange($event)">
+              
+            </div>
+           
+
+    </div>
+    <br/>
+    <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Create Task</button>
+</form>
+</div>
+</div>
+</div>
+<div *ngIf="success" class="alert alert-success" role="alert">
+    This is a success task!
+  </div>
